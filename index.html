@@ -212,7 +212,7 @@
   <section>
     <div class="sec-label"><span class="sec-num">04</span><h2>Shortlisted universities</h2></div>
     <table>
-      <thead><tr><th>University</th><th>Country</th><th>Status</th><th class="row-actions"></th></tr></thead>
+      <thead><tr><th>University</th><th>Country</th></tr></thead>
       <tbody id="uniRows"></tbody>
     </table>
     <!-- <button class="add-row" type="button" onclick="addRow('uniRows')">+ add university</button> -->
@@ -221,7 +221,7 @@
   <section>
     <div class="sec-label"><span class="sec-num">05</span><h2>Shortlisted courses</h2></div>
     <table>
-      <thead><tr><th>Course</th><th>University</th><th>Status</th><th class="row-actions"></th></tr></thead>
+      <thead><tr><th>Course</th><th>University</th></tr></thead>
       <tbody id="courseRows"></tbody>
     </table>
     <!-- <button class="add-row" type="button" onclick="addRow('courseRows')">+ add course</button> -->
@@ -262,7 +262,7 @@ function addRow(bodyId){
   `;
   tbody.appendChild(tr);
 }
-for(let i=0;i<2;i++){addRow('uniRows');addRow('courseRows');}
+// for(let i=0;i<2;i++){addRow('uniRows');addRow('courseRows');}
 
 // const fileNo = String(Math.floor(1000 + Math.random()*8999));
 // document.getElementById('fileNo').textContent = fileNo;
