@@ -215,7 +215,7 @@
       <thead><tr><th>University</th><th>Country</th><th>Status</th><th class="row-actions"></th></tr></thead>
       <tbody id="uniRows"></tbody>
     </table>
-    <button class="add-row" type="button" onclick="addRow('uniRows')">+ add university</button>
+    <!-- <button class="add-row" type="button" onclick="addRow('uniRows')">+ add university</button> -->
   </section>
 
   <section>
@@ -224,7 +224,7 @@
       <thead><tr><th>Course</th><th>University</th><th>Status</th><th class="row-actions"></th></tr></thead>
       <tbody id="courseRows"></tbody>
     </table>
-    <button class="add-row" type="button" onclick="addRow('courseRows')">+ add course</button>
+    <!-- <button class="add-row" type="button" onclick="addRow('courseRows')">+ add course</button> -->
   </section>
 
   <section>
@@ -247,17 +247,21 @@ function addRow(bodyId){
   tr.innerHTML = `
     <td><input type="text"></td>
     <td><input type="text"></td>
-    <td>
-      <select>
-        <option value="">—</option>
-        <option>Applied</option>
-        <option>Shortlisted</option>
-        <option>Not required yet</option>
-        <option>Offer received</option>
-        <option>Rejected</option>
-      </select>
-    </td>
-    <td class="row-actions"><button class="del-btn" type="button" onclick="this.closest('tr').remove()">×</button></td>
+    <td><input type="text"></td>
+    <td><input type="text"></td>
+    <td><input type="text"></td>
+    <td><input type="text"></td>
+    // <td>
+    //   <select>
+    //     <option value="">—</option>
+    //     <option>Applied</option>
+    //     <option>Shortlisted</option>
+    //     <option>Not required yet</option>
+    //     <option>Offer received</option>
+    //     <option>Rejected</option>
+    //   </select>
+    // </td>
+    // <td class="row-actions"><button class="del-btn" type="button" onclick="this.closest('tr').remove()">×</button></td>
   `;
   tbody.appendChild(tr);
 }
