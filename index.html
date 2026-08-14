@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Application Tracker</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Spectral:wght@500;600&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@500&display=swap');
+
+  :root{
+    --paper:#F0F1E9;
+    --card:#FBFBF7;
+    --ink:#1E2530;
+    --ink-soft:#5B6270;
+    --line:#C9CBBC;
+    --stamp:#AE3F27;
+    --stamp-bg:#F4E4DE;
+    --seal:#33625C;
+    --seal-bg:#E1EAE6;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    font-family:'IBM Plex Sans',sans-serif;
+    color:var(--ink);
+    padding:40px 16px 80px;
+  }
+  .sheet{
+    max-width:760px;
+    margin:0 auto;
+    background:var(--card);
+    border:1px solid var(--line);
+    box-shadow:0 1px 0 var(--line);
+  }
+  .sheet-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    padding:32px 36px 20px;
+    border-bottom:2px solid var(--ink);
+  }
+  .sheet-head h1{
+    font-family:'Spectral',serif;
+    font-weight:600;
+    font-size:26px;
+    margin:0;
+    letter-spacing:0.2px;
+  }
+  .sheet-head p{
+    margin:4px 0 0;
+    font-size:12.5px;
+    color:var(--ink-soft);
+    font-family:'IBM Plex Mono',monospace;
+    letter-spacing:0.3px;
+  }
+  .stamp{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    color:var(--stamp);
+    border:1.5px solid var(--stamp);
+    padding:6px 10px;
+    text-align:center;
+    transform:rotate(2deg);
+    white-space:nowrap;
+  }
+  .stamp span{display:block;font-size:15px;font-weight:500;letter-spacing:1px;}
+
+  section{padding:26px 36px;border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+  .sec-label{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    margin:0 0 16px;
+  }
+  .sec-num{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:var(--seal);
+    background:var(--seal-bg);
+    padding:2px 7px;
+    border-radius:2px;
+  }
+  .sec-label h2{
+    font-family:'Spectral',serif;
+    font-weight:600;
+    font-size:17px;
+    margin:0;
+  }
+
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 20px;}
+  .field{display:flex;flex-direction:column;gap:5px;}
+  .field.full{grid-column:1/-1;}
+  label{font-size:11.5px;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:0.4px;}
+  input[type=text],input[type=email],input[type=tel],input[type=date],select,textarea{
+    font-family:'IBM Plex Sans',sans-serif;
+    font-size:14px;
+    padding:8px 10px;
+    border:1px solid var(--line);
+    border-radius:2px;
+    background:#fff;
+    color:var(--ink);
+  }
+  textarea{resize:vertical;min-height:70px;}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--seal);box-shadow:0 0 0 2px var(--seal-bg);}
+
+  .checklist{display:flex;flex-direction:column;gap:10px;}
+  .check-row{display:flex;align-items:center;gap:10px;font-size:14px;}
+  .check-row input[type=checkbox]{width:16px;height:16px;accent-color:var(--seal);}
+
+  table{width:100%;border-collapse:collapse;margin-top:4px;}
+  th{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;text-transform:uppercase;letter-spacing:0.3px;
+    color:var(--ink-soft);text-align:left;padding:0 8px 8px;font-weight:500;
+    border-bottom:1px solid var(--line);
+  }
+  td{padding:6px 8px;border-bottom:1px solid var(--line);}
+  td input,td select{width:100%;border:none;background:transparent;padding:6px 2px;font-size:13.5px;}
+  td input:focus,td select:focus{background:var(--seal-bg);outline:none;}
+  .row-actions{width:34px;}
+  .del-btn{
+    border:none;background:transparent;color:var(--stamp);cursor:pointer;font-size:15px;line-height:1;padding:4px;
+  }
+  .add-row{
+    margin-top:10px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:var(--seal);
+    background:var(--seal-bg);
+    border:1px solid var(--seal);
+    padding:6px 12px;
+    border-radius:2px;
+    cursor:pointer;
+  }
+  .add-row:hover{opacity:0.85;}
+
+  .foot{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:24px 36px 34px;
+  }
+  .foot-note{font-size:11.5px;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;}
+  .print-btn{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12.5px;
+    color:#fff;background:var(--ink);
+    border:none;padding:10px 18px;border-radius:2px;cursor:pointer;letter-spacing:0.3px;
+  }
+  .print-btn:hover{opacity:0.9;}
+
+  @media print{
+    body{background:#fff;padding:0;}
+    .sheet{border:none;box-shadow:none;max-width:none;}
+    .print-btn{display:none;}
+    .del-btn,.add-row{display:none;}
+  }
+  @media (max-width:600px){
+    .grid{grid-template-columns:1fr;}
+    .sheet-head{flex-direction:column;gap:14px;}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="sheet-head">
+    <div>
+      <h1>Application tracker</h1>
+      <p>Study abroad — personal / academic / shortlist file</p>
+    </div>
+    <div class="stamp">FILE NO.<span id="fileNo">—</span></div>
+  </div>
+
+  <section>
+    <div class="sec-label"><span class="sec-num">01</span><h2>Personal details</h2></div>
+    <div class="grid">
+      <div class="field"><label>Full name</label><input type="text"></div>
+      <div class="field"><label>Date of birth</label><input type="date"></div>
+      <div class="field"><label>Nationality</label><input type="text"></div>
+      <div class="field"><label>Passport number</label><input type="text"></div>
+      <div class="field"><label>Email</label><input type="email"></div>
+      <div class="field"><label>Phone</label><input type="tel"></div>
+      <div class="field full"><label>Current address</label><input type="text"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label"><span class="sec-num">02</span><h2>Academic details</h2></div>
+    <div class="grid">
+      <div class="field"><label>Highest qualification</label><input type="text"></div>
+      <div class="field"><label>Institution</label><input type="text"></div>
+      <div class="field"><label>Grade / GPA / percentage</label><input type="text"></div>
+      <div class="field"><label>Year of completion</label><input type="text"></div>
+      <div class="field"><label>English test (type + score)</label><input type="text" placeholder="e.g. IELTS 7.0"></div>
+      <div class="field"><label>Standardized test (type + score)</label><input type="text" placeholder="e.g. GRE 320"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label"><span class="sec-num">03</span><h2>Checklist</h2></div>
+    <div class="checklist" id="checklist">
+      <label class="check-row"><input type="checkbox"><span>Passport copy</span></label>
+      <label class="check-row"><input type="checkbox"><span>Academic transcripts</span></label>
+      <label class="check-row"><input type="checkbox"><span>Statement of purpose</span></label>
+      <label class="check-row"><input type="checkbox"><span>Letters of recommendation</span></label>
+      <label class="check-row"><input type="checkbox"><span>English / standardized test scores</span></label>
+      <label class="check-row"><input type="checkbox"><span>Resume / CV</span></label>
+      <label class="check-row"><input type="checkbox"><span>Application fee paid</span></label>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label"><span class="sec-num">04</span><h2>Shortlisted universities</h2></div>
+    <table>
+      <thead><tr><th>University</th><th>Country</th><th>Status</th><th class="row-actions"></th></tr></thead>
+      <tbody id="uniRows"></tbody>
+    </table>
+    <button class="add-row" type="button" onclick="addRow('uniRows')">+ add university</button>
+  </section>
+
+  <section>
+    <div class="sec-label"><span class="sec-num">05</span><h2>Shortlisted courses</h2></div>
+    <table>
+      <thead><tr><th>Course</th><th>University</th><th>Status</th><th class="row-actions"></th></tr></thead>
+      <tbody id="courseRows"></tbody>
+    </table>
+    <button class="add-row" type="button" onclick="addRow('courseRows')">+ add course</button>
+  </section>
+
+  <section>
+    <div class="sec-label"><span class="sec-num">06</span><h2>Remarks</h2></div>
+    <textarea placeholder="Notes, follow-ups, anything not required yet..."></textarea>
+  </section>
+
+  <div class="foot">
+
+    <button class="print-btn" onclick="window.print()">Print / save PDF</button>
+  </div>
+
+</div>
+
+<script>
+function addRow(bodyId){
+  const tbody = document.getElementById(bodyId);
+  const tr = document.createElement('tr');
+  const isStatus = true;
+  tr.innerHTML = `
+    <td><input type="text"></td>
+    <td><input type="text"></td>
+    <td>
+      <select>
+        <option value="">—</option>
+        <option>Applied</option>
+        <option>Shortlisted</option>
+        <option>Not required yet</option>
+        <option>Offer received</option>
+        <option>Rejected</option>
+      </select>
+    </td>
+    <td class="row-actions"><button class="del-btn" type="button" onclick="this.closest('tr').remove()">×</button></td>
+  `;
+  tbody.appendChild(tr);
+}
+for(let i=0;i<2;i++){addRow('uniRows');addRow('courseRows');}
+
+const fileNo = String(Math.floor(1000 + Math.random()*8999));
+document.getElementById('fileNo').textContent = fileNo;
+</script>
+</body>
+</html>
