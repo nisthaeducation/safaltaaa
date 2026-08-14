@@ -244,13 +244,13 @@ function addRow(bodyId){
   const tbody = document.getElementById(bodyId);
   const tr = document.createElement('tr');
   const isStatus = true;
-  tr.innerHTML = `
-    <td><input type="text"></td>
-    <td><input type="text"></td>
-    <td><input type="text"></td>
-    <td><input type="text"></td>
-    <td><input type="text"></td>
-    <td><input type="text"></td>
+  // tr.innerHTML = `
+  //   <td><input type="text"></td>
+  //   <td><input type="text"></td>
+  //   <td><input type="text"></td>
+  //   <td><input type="text"></td>
+  //   <td><input type="text"></td>
+  //   <td><input type="text"></td>
     // <td>
     //   <select>
     //     <option value="">—</option>
@@ -263,7 +263,7 @@ function addRow(bodyId){
     // </td>
     // <td class="row-actions"><button class="del-btn" type="button" onclick="this.closest('tr').remove()">×</button></td>
   `;
-  tbody.appendChild(tr);
+  // tbody.appendChild(tr);
 }
 for(let i=0;i<2;i++){addRow('uniRows');addRow('courseRows');}
 
