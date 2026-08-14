@@ -168,14 +168,14 @@
       <h1>Application tracker</h1>
       <p>Study abroad — personal / academic / shortlist file</p>
     </div>
-    <div class="stamp">FILE NO.<span id="fileNo">—</span></div>
+    <div class="stamp">FILE NO.<span id="fileNo"><pre>        </pre></span></div>
   </div>
 
   <section>
     <div class="sec-label"><span class="sec-num">01</span><h2>Personal details</h2></div>
     <div class="grid">
       <div class="field"><label>Full name</label><input type="text"></div>
-      <div class="field"><label>Date of birth</label><input type="date"></div>
+      <div class="field"><label>Date of birth</label><input type="text"></div>
       <div class="field"><label>Nationality</label><input type="text"></div>
       <div class="field"><label>Passport number</label><input type="text"></div>
       <div class="field"><label>Email</label><input type="email"></div>
@@ -191,8 +191,8 @@
       <div class="field"><label>Institution</label><input type="text"></div>
       <div class="field"><label>Grade / GPA / percentage</label><input type="text"></div>
       <div class="field"><label>Year of completion</label><input type="text"></div>
-      <div class="field"><label>English test (type + score)</label><input type="text" placeholder="e.g. IELTS 7.0"></div>
-      <div class="field"><label>Standardized test (type + score)</label><input type="text" placeholder="e.g. GRE 320"></div>
+      <div class="field"><label>English test (type + score)</label><input type="text" ></div>
+      <div class="field"><label>Standardized test (type + score)</label><input type="text"></div>
     </div>
   </section>
 
@@ -229,7 +229,7 @@
 
   <section>
     <div class="sec-label"><span class="sec-num">06</span><h2>Remarks</h2></div>
-    <textarea placeholder="Notes, follow-ups, anything not required yet..."></textarea>
+    <textarea ></textarea>
   </section>
 
   <div class="foot">
@@ -263,8 +263,8 @@ function addRow(bodyId){
 }
 for(let i=0;i<2;i++){addRow('uniRows');addRow('courseRows');}
 
-const fileNo = String(Math.floor(1000 + Math.random()*8999));
-document.getElementById('fileNo').textContent = fileNo;
+// const fileNo = String(Math.floor(1000 + Math.random()*8999));
+// document.getElementById('fileNo').textContent = fileNo;
 </script>
 </body>
 </html>
